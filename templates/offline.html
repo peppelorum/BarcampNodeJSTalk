@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+
+<html manifest="/static/public/cache.manifest">
+
+<head>
+	<title>Offline</title>
+
+	<script type="text/javascript" src="/static/public/libs/head.load.min.js"></script>
+
+	<script type="text/javascript">
+
+		var module = [];
+		module['exports'] = [];
+
+		head.js(
+			'/static/public/libs/jquery-1.8.1.min.js',
+			'/secret/1.js',
+			'/secret/logic.js',
+			function() {
+				console.log('ran')
+			}		
+			);
+
+		head.ready(function() {
+			$('.nicco').on('change', function(evt) {
+				var url = '/calc/'+ $(this).val().toString()
+				$.ajax(
+					{
+						url: url,
+						success: function(data, textStatus, jqHXR) {
+							console.log('data', data);
+
+							$('p').html(data);
+						}
+					}
+				);
+			});
+		})
+
+	</script>
+
+
+</head>
+
+<body>
+
+<input class="nicco">
+
+
+<p>
+
+</p>
+
+</body>
+</html>
